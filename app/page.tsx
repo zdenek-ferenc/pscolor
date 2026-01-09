@@ -13,7 +13,7 @@ const ServiceCard = ({ icon, title, children }: { icon: React.ReactNode, title: 
       {icon}
     </div>
     <h3 className="text-xl sm:text-2xl md:text-3xl font-bold text-white mb-4">
-     {title}
+      {title}
     </h3>
     <p className="text-gray-300 text-base md:text-lg leading-relaxed">{children}</p>
   </div>
@@ -33,7 +33,7 @@ const TestimonialCard = ({ quote, author }: { quote: string, author: string }) =
 
 export default function HomePage() {
   return (
-    <>
+    <div className="w-full overflow-x-hidden">
       <section className="relative w-full h-[800px] sm:min-h-screen flex items-center text-white">
         <div className="absolute inset-0">
           <div className="hidden md:block absolute inset-0">
@@ -93,6 +93,7 @@ export default function HomePage() {
           </ScrollReveal>
         </div>
       </section>
+
       <section id="sluzby" className="pb-20 sm:py-20 bg-dark">
         <div className="container mx-auto px-4 text-center">
           <ScrollReveal variant="fade-up">
@@ -128,6 +129,7 @@ export default function HomePage() {
           </div>
         </div>
       </section>
+
       <section className="py-20 bg-darker">
         <div className="container mx-auto px-4 grid lg:grid-cols-2 gap-12 items-center">
           <ScrollReveal variant="fade-right">
@@ -169,7 +171,8 @@ export default function HomePage() {
           </ScrollReveal>
         </div>
       </section>
-            <section className="py-20 bg-dark">
+
+      <section className="py-20 bg-dark">
         <div className="container mx-auto px-4 text-center">
           <ScrollReveal variant="fade-up">
             <h2 className="text-red text-3xl md:text-5xl font-extrabold uppercase mb-4">
@@ -206,6 +209,7 @@ export default function HomePage() {
           </ScrollReveal>
         </div>
       </section>
+
       <section className="py-20 bg-darker">
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
@@ -254,6 +258,7 @@ export default function HomePage() {
           </div>
         </div>
       </section>
+
       <section className="py-20 bg-dark">
         <div className="container mx-auto px-4">
           <ScrollReveal variant="fade-up">
@@ -279,6 +284,7 @@ export default function HomePage() {
           </div>
         </div>
       </section>
+
       <section id="poptavka" className="py-20 bg-dark">
         <div className="container mx-auto px-4">
           <ScrollReveal variant="fade-up">
@@ -312,6 +318,6 @@ export default function HomePage() {
           </ScrollReveal>
         </div>
       </section>
-    </>
+    </div>
   )
 }

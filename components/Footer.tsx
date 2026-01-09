@@ -11,7 +11,7 @@ export const Footer = () => {
             <div className="space-y-3">
               <a href="tel:+420123456789" className="flex items-center gap-2 hover:text-white transition-colors">
                 <Phone size={18} />
-                <span>+420 123 456 789</span>
+                <span>+420 739 522 226</span>
               </a>
               <a href="mailto:info@pscolor.cz" className="flex items-center gap-2 hover:text-white transition-colors">
                 <Mail size={18} />
@@ -47,7 +47,7 @@ export const Footer = () => {
               </div>
               <div className="flex gap-6">
                 <span>Sobota:</span>
-                <span className="text-white">9:00 - 13:00</span>
+                <span className="text-red">Zavřeno</span>
               </div>
               <div className="flex gap-6">
                 <span>Neděle:</span>
