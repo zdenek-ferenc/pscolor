@@ -1,18 +1,15 @@
 @import "tailwindcss";
 
 :root {
-  /* Professional Color Palette */
   --bg-dark: #0a0a0a;
   --bg-darker: #050505;
   
-  /* Accent Colors - Toned Down */
   --accent-red: #DC2626;
   --accent-red-hover: #EF4444;
   
   --accent-blue: #3B82F6;
   --accent-blue-hover: #60A5FA;
   
-  /* Fonts */
   --font-sans: var(--font-urbanist);
 }
 
@@ -41,7 +38,6 @@
     overflow-x: hidden;
   }
 
-  /* Custom Scrollbar */
   ::-webkit-scrollbar {
     width: 8px;
   }
@@ -56,7 +52,6 @@
     background: var(--accent-red);
   }
   
-  /* Selection */
   ::selection {
     background: var(--accent-red);
     color: white;
@@ -64,7 +59,6 @@
 }
 
 @layer utilities {
-  /* Enhanced Glassmorphism */
   .glass {
     background: rgba(255, 255, 255, 0.05);
     backdrop-filter: blur(12px);
@@ -72,18 +66,15 @@
     border: 1px solid rgba(255, 255, 255, 0.1);
   }
   
-  /* Smooth Transitions */
   .transition-smooth {
     transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   }
   
-  /* Hover Scale */
   .hover-lift:hover {
     transform: translateY(-4px);
     box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3);
   }
 
-  /* Simple Animations */
   .animate-fade-up {
     animation: fadeUp 0.6s ease-out forwards;
   }
@@ -93,7 +84,6 @@
   .delay-300 { animation-delay: 0.3s; }
 }
 
-/* Keyframes */
 @keyframes fadeUp {
   from {
     opacity: 0;

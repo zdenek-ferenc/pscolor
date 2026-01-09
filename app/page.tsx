@@ -1,4 +1,3 @@
-// app/page.tsx
 'use client'
 
 import Image from 'next/image'
@@ -8,16 +7,15 @@ import { ScrollReveal } from '@/components/ScrollReveal'
 import { ScannerComparison } from '@/components/ScannerComparison'
 import { ContactForm } from '@/components/ContactForm'
 
-// Sub-komponenty
 const ServiceCard = ({ icon, title, children }: { icon: React.ReactNode, title: string, children: React.ReactNode }) => (
-  <div className="p-8 glass rounded-xl hover:bg-white/10 transition-smooth hover-lift h-full">
+  <div className="p-6 sm:p-8 glass rounded-xl hover:bg-white/10 transition-smooth hover-lift h-full">
     <div className="mb-5 text-red">
       {icon}
     </div>
-    <h3 className="text-2xl md:text-3xl font-bold text-white mb-4">
+    <h3 className="text-xl sm:text-2xl md:text-3xl font-bold text-white mb-4">
      {title}
     </h3>
-    <p className="text-gray-300 md:text-lg leading-relaxed">{children}</p>
+    <p className="text-gray-300 text-base md:text-lg leading-relaxed">{children}</p>
   </div>
 );
 
@@ -33,24 +31,37 @@ const TestimonialCard = ({ quote, author }: { quote: string, author: string }) =
   </div>
 );
 
-// Hlavní komponenta
 export default function HomePage() {
   return (
     <>
-      {/* HERO */}
-      <section className="relative min-h-screen flex items-center text-white">
+      <section className="relative w-full h-[800px] sm:min-h-screen flex items-center text-white">
         <div className="absolute inset-0">
-          <Image
-            src="/landingbg.png"
-            alt="Profesionální lakování auta"
-            fill
-            className="object-cover"
-            priority
-          />
+          <div className="hidden md:block absolute inset-0">
+            <Image
+              src="/landingbg.png"
+              alt="Profesionální lakování auta"
+              fill
+              className="object-cover"
+              priority
+              quality={90}
+            />
+          </div>
+
+          <div className="block md:hidden absolute inset-0">
+            <Image
+              src="/mobilelanding.png"
+              alt="Profesionální lakování auta"
+              fill
+              className="object-cover"
+              priority
+              quality={90}
+            />
+          </div>
+
           <div className="absolute inset-0"></div>
         </div>
 
-        <div className="relative z-10 container mx-auto px-4 py-32 text-center">
+        <div className="relative z-10 container mx-auto px-4 sm:py-32 text-center">
           <ScrollReveal variant="fade-up">
             <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-tight mb-6">
               Precizní opravy karoserií a laků v Ostravě
@@ -67,14 +78,14 @@ export default function HomePage() {
             <div className="flex justify-center gap-4 flex-wrap">
               <Link 
                 href="#poptavka" 
-                className="px-8 py-4 bg-[var(--accent-red)] hover:bg-[var(--accent-red-hover)] text-white font-bold text-lg rounded-full transition-all duration-300 shadow-lg"
+                className="px-8 py-4 bg-[var(--accent-red)] hover:bg-[var(--accent-red-hover)] text-white font-bold text-lg rounded-full transition-all duration-300 shadow-lg hover:scale-105"
               >
                 Nezávazná poptávka
               </Link>
               
               <Link 
                 href="#sluzby" 
-                className="px-8 py-4 glass border-2 border-white/20 hover:border-white/40 text-white font-bold text-lg rounded-full transition-all duration-300"
+                className="px-8 py-4 glass border-2 border-white/20 hover:border-white/40 text-white font-bold text-lg rounded-full transition-all duration-300 hover:bg-white/10"
               >
                 Naše služby
               </Link>
@@ -82,12 +93,10 @@ export default function HomePage() {
           </ScrollReveal>
         </div>
       </section>
-
-      {/* SLUŽBY */}
-      <section id="sluzby" className="pt-5 pb-20 bg-dark">
+      <section id="sluzby" className="pb-20 sm:py-20 bg-dark">
         <div className="container mx-auto px-4 text-center">
           <ScrollReveal variant="fade-up">
-            <h2 className="uppercase text-3xl md:text-5xl text-red font-bold mb-4">
+            <h2 className="uppercase text-3xl md:text-5xl text-red font-extrabold mb-4">
               Naše služby
             </h2>
           </ScrollReveal>
@@ -119,14 +128,12 @@ export default function HomePage() {
           </div>
         </div>
       </section>
-
-      {/* PROČ NÁS */}
       <section className="py-20 bg-darker">
         <div className="container mx-auto px-4 grid lg:grid-cols-2 gap-12 items-center">
           <ScrollReveal variant="fade-right">
-            <div className="relative w-full h-80 lg:h-full rounded-2xl overflow-hidden">
+            <div className="relative w-full h-80 lg:h-96 rounded-2xl overflow-hidden">
               <Image 
-                src="/why-us.jpg" 
+                src="/why.jpg" 
                 alt="Detailní práce na autě" 
                 fill 
                 className="object-cover"
@@ -136,7 +143,7 @@ export default function HomePage() {
 
           <ScrollReveal variant="fade-left">
             <div>
-              <h2 className="text-3xl md:text-5xl font-bold mb-6 text-red uppercase">
+              <h2 className="text-3xl md:text-5xl font-bold mb-6 font-extrabold text-red uppercase">
                 Proč svěřit vůz právě nám?
               </h2>
               
@@ -151,8 +158,8 @@ export default function HomePage() {
                   { title: 'Servis od A do Z bez starostí:', text: 'Od nahlášení škody, přes pojišťovnu, po zapůjčení náhradního vozu.' },
                 ].map((item, idx) => (
                   <li key={idx} className="flex items-start gap-4">
-                    <CheckCircle2 className="w-7 h-7 text-red flex-shrink-0 mt-1" strokeWidth={2} />
-                    <span className="text-gray-200 text-lg">
+                    <CheckCircle2 className="w-6 h-6 md:w-7 md:h-7 text-red flex-shrink-0 mt-1" strokeWidth={2} />
+                    <span className="text-gray-200 md:text-lg">
                       <span className="font-bold text-red">{item.title}</span> {item.text}
                     </span>
                   </li>
@@ -162,12 +169,10 @@ export default function HomePage() {
           </ScrollReveal>
         </div>
       </section>
-      
-      {/* UKÁZKA */}
-      <section className="py-20 bg-dark">
+            <section className="py-20 bg-dark">
         <div className="container mx-auto px-4 text-center">
           <ScrollReveal variant="fade-up">
-            <h2 className="text-red text-3xl md:text-5xl font-bold uppercase mb-4">
+            <h2 className="text-red text-3xl md:text-5xl font-extrabold uppercase mb-4">
               Naše práce mluví za vše
             </h2>
           </ScrollReveal>
@@ -201,14 +206,12 @@ export default function HomePage() {
           </ScrollReveal>
         </div>
       </section>
-
-      {/* SPIES HECKER */}
       <section className="py-20 bg-darker">
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <ScrollReveal variant="fade-right">
               <div>
-                <h2 className="text-4xl md:text-5xl font-bold mb-6 text-red">
+                <h2 className="text-4xl md:text-5xl font-extrabold mb-6 text-red">
                   Spies Hecker
                 </h2>
                 
@@ -251,8 +254,6 @@ export default function HomePage() {
           </div>
         </div>
       </section>
-
-      {/* TESTIMONIALS */}
       <section className="py-20 bg-dark">
         <div className="container mx-auto px-4">
           <ScrollReveal variant="fade-up">
@@ -278,8 +279,6 @@ export default function HomePage() {
           </div>
         </div>
       </section>
-
-      {/* KONTAKT FORMULÁŘ */}
       <section id="poptavka" className="py-20 bg-dark">
         <div className="container mx-auto px-4">
           <ScrollReveal variant="fade-up">
@@ -297,18 +296,16 @@ export default function HomePage() {
           <ScrollReveal variant="fade-up" delay={0.1}>
             <ContactForm />
           </ScrollReveal>
-
-          {/* Alternativní kontakt */}
           <ScrollReveal variant="fade-up" delay={0.2}>
             <div className="mt-16 text-center">
               <p className="text-gray-400 mb-4">Nebo nás kontaktujte přímo:</p>
               <div className="flex justify-center items-center gap-8 flex-wrap">
                 <a 
-                  href="tel:+420123456789" 
+                  href="tel:+420739522226" 
                   className="flex items-center gap-3 text-lg font-semibold text-white hover:text-red transition-colors duration-300"
                 >
                   <Phone size={24} />
-                  <span>+420 123 456 789</span>
+                  <span>+420 739 522 226</span>
                 </a>
               </div>
             </div>

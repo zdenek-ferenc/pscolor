@@ -1,12 +1,11 @@
 import Link from 'next/link'
-import { Phone, Mail, MapPin } from 'lucide-react'
+import { Phone, Mail, MapPin, FileText } from 'lucide-react'
 
 export const Footer = () => {
   return (
     <footer className="bg-black border-t border-white/10 text-gray-300">
       <div className="container mx-auto px-4 py-12">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {/* Kontakt */}
           <div>
             <h3 className="text-white font-bold text-lg mb-4">Kontakt</h3>
             <div className="space-y-3">
@@ -22,10 +21,14 @@ export const Footer = () => {
                 <MapPin size={18} className="mt-1 flex-shrink-0" />
                 <span>Novoveská 95/11<br />709 00 Ostrava</span>
               </div>
+            
+              <div className="flex items-center gap-2">
+                <FileText size={18} className="flex-shrink-0" />
+                <span className="text-sm">IČO: 61973785 | DIČ: CZ61973785</span>
+              </div>
             </div>
           </div>
 
-          {/* Odkazy */}
           <div>
             <h3 className="text-white font-bold text-lg mb-4">Rychlé odkazy</h3>
             <nav className="space-y-2">
@@ -35,7 +38,6 @@ export const Footer = () => {
             </nav>
           </div>
 
-          {/* Otevírací doba */}
           <div>
             <h3 className="text-white font-bold text-lg mb-4">Otevírací doba</h3>
             <div className="space-y-2 text-sm">

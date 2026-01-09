@@ -1,5 +1,3 @@
-// app/layout.tsx
-
 import type { Metadata } from 'next'
 import { Urbanist } from 'next/font/google'
 import './globals.css'
@@ -7,7 +5,6 @@ import { Header } from '@/components/Header'
 import { SmoothScroll } from '@/components/SmoothScroll'
 import { Footer } from '@/components/Footer'
 
-// Konfigurace fontu - pouze Urbanist s podporou české diakritiky
 const urbanist = Urbanist({ 
   subsets: ['latin-ext'],
   variable: '--font-urbanist',

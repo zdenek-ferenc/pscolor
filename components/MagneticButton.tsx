@@ -8,7 +8,7 @@ interface MagneticButtonProps {
   className?: string
   href?: string
   onClick?: () => void
-  strength?: number // 0-1, how strong the magnetic effect is
+  strength?: number 
 }
 
 export const MagneticButton = ({
@@ -30,8 +30,6 @@ export const MagneticButton = ({
 
     const distanceX = e.clientX - centerX
     const distanceY = e.clientY - centerY
-
-    // Apply magnetic effect
     setPosition({
       x: distanceX * strength,
       y: distanceY * strength,

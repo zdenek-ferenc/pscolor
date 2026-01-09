@@ -20,13 +20,11 @@ export const ContactForm = () => {
     e.preventDefault()
     setIsSubmitting(true)
     
-    // Simulace odeslání
     await new Promise(resolve => setTimeout(resolve, 1500))
     
     setIsSubmitting(false)
     setIsSubmitted(true)
     
-    // Reset po 3 sekundách
     setTimeout(() => {
       setIsSubmitted(false)
       setFormData({ name: '', email: '', phone: '', carBrand: '', carModel: '', message: '' })
@@ -42,8 +40,7 @@ export const ContactForm = () => {
 
   return (
     <div className="max-w-3xl mx-auto">
-      <form onSubmit={handleSubmit} className="space-y-6">
-        {/* Osobní údaje */}
+      <form onSubmit={handleSubmit} className="space-y-4 md:space-y-6">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div>
             <label htmlFor="name" className="block text-sm font-medium text-gray-300 mb-2">
@@ -55,7 +52,7 @@ export const ContactForm = () => {
               required
               value={formData.name}
               onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-              className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg focus:outline-none focus:border-red focus:ring-1 focus:ring-red transition-colors text-white"
+              className="w-full px-2 py-2 md:px-4 px-2 py-2 md:py-3 bg-white/5 border border-white/10 rounded-lg focus:outline-none focus:border-red focus:ring-1 focus:ring-red transition-colors text-white"
               placeholder="Jan Novák"
             />
           </div>
@@ -70,7 +67,7 @@ export const ContactForm = () => {
               required
               value={formData.phone}
               onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-              className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg focus:outline-none focus:border-red focus:ring-1 focus:ring-red transition-colors text-white"
+              className="w-full px-2 py-2 md:px-4 px-2 py-2 md:py-3 bg-white/5 border border-white/10 rounded-lg focus:outline-none focus:border-red focus:ring-1 focus:ring-red transition-colors text-white"
               placeholder="+420 123 456 789"
             />
           </div>
@@ -86,12 +83,10 @@ export const ContactForm = () => {
             required
             value={formData.email}
             onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-            className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg focus:outline-none focus:border-red focus:ring-1 focus:ring-red transition-colors text-white"
+            className="w-full px-2 py-2 md:px-4 px-2 py-2 md:py-3 bg-white/5 border border-white/10 rounded-lg focus:outline-none focus:border-red focus:ring-1 focus:ring-red transition-colors text-white"
             placeholder="jan.novak@email.cz"
           />
         </div>
-
-        {/* Informace o vozidle */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div>
             <label htmlFor="carBrand" className="block text-sm font-medium text-gray-300 mb-2">
@@ -103,7 +98,7 @@ export const ContactForm = () => {
               required
               value={formData.carBrand}
               onChange={(e) => setFormData({ ...formData, carBrand: e.target.value })}
-              className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg focus:outline-none focus:border-red focus:ring-1 focus:ring-red transition-colors text-white"
+              className="w-full px-2 py-2 md:px-4 px-2 py-2 md:py-3 bg-white/5 border border-white/10 rounded-lg focus:outline-none focus:border-red focus:ring-1 focus:ring-red transition-colors text-white"
               placeholder="Škoda"
             />
           </div>
@@ -118,13 +113,11 @@ export const ContactForm = () => {
               required
               value={formData.carModel}
               onChange={(e) => setFormData({ ...formData, carModel: e.target.value })}
-              className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg focus:outline-none focus:border-red focus:ring-1 focus:ring-red transition-colors text-white"
+              className="w-full px-2 py-2 md:px-4 px-2 py-2 md:py-3 bg-white/5 border border-white/10 rounded-lg focus:outline-none focus:border-red focus:ring-1 focus:ring-red transition-colors text-white"
               placeholder="Octavia"
             />
           </div>
         </div>
-
-        {/* Popis */}
         <div>
           <label htmlFor="message" className="block text-sm font-medium text-gray-300 mb-2">
             Popis poškození
@@ -134,12 +127,10 @@ export const ContactForm = () => {
             rows={4}
             value={formData.message}
             onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-            className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg focus:outline-none focus:border-red focus:ring-1 focus:ring-red transition-colors text-white resize-none"
+            className="w-full px-2 py-2 md:px-4 px-2 py-2 md:py-3 bg-white/5 border border-white/10 rounded-lg focus:outline-none focus:border-red focus:ring-1 focus:ring-red transition-colors text-white resize-none"
             placeholder="Stručně popište poškození vašeho vozidla..."
           />
         </div>
-
-        {/* Nahrání fotografie */}
         <div>
           <label className="block text-sm font-medium text-gray-300 mb-2">
             Fotografie poškození
@@ -166,8 +157,6 @@ export const ContactForm = () => {
             Doporučené formáty: JPG, PNG. Max. velikost: 10MB
           </p>
         </div>
-
-        {/* Submit Button */}
         <button
           type="submit"
           disabled={isSubmitting || isSubmitted}

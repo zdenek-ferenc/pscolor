@@ -32,9 +32,11 @@ const handleUpload = async () => {
     }
 
     alert('Fotka byla úspěšně nahrána!')
-    } catch (error: any) {
-    console.error('Chyba při nahrávání:', error)
-    alert(`Chyba: ${error.message}`)
+    } catch (error) {
+    // Type-safe error handling
+    const errMsg = error instanceof Error ? error.message : String(error);
+    console.error('Chyba při nahrávání:', error);
+    alert(`Chyba: ${errMsg}`);
     } finally {
     setUploading(false)
     setFile(null)
