@@ -49,7 +49,7 @@ export default function HomePage() {
 
           <div className="block md:hidden absolute inset-0">
             <Image
-              src="/mobilelanding.png"
+              src="/mobilelanding2.png"
               alt="Profesionální lakování auta"
               fill
               className="object-cover"
