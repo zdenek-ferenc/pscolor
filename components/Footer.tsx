@@ -24,7 +24,7 @@ export const Footer = () => {
             
               <div className="flex items-center gap-2">
                 <FileText size={18} className="flex-shrink-0" />
-                <span className="text-sm">IČO: 61973785 | DIČ: CZ61973785</span>
+                <span className="text-sm">IČO: 29391512 | DIČ: CZ29391512</span>
               </div>
             </div>
           </div>

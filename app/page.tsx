@@ -23,7 +23,7 @@ const TestimonialCard = ({ quote, author }: { quote: string, author: string }) =
   <div className="glass p-8 rounded-xl h-full transition-smooth hover-lift">
     <div className="flex gap-1 mb-4">
       {[...Array(5)].map((_, i) => (
-        <Star key={i} size={20} fill="#3B82F6" className="text-blue" />
+        <Star key={i} size={20} fill="#ddb327" className="text-yellow-500" />
       ))}
     </div>
     <p className="text-gray-200 italic mb-6 text-lg leading-relaxed">{quote}</p>
@@ -38,7 +38,7 @@ export default function HomePage() {
         <div className="absolute inset-0">
           <div className="hidden md:block absolute inset-0">
             <Image
-              src="/landingbg.png"
+              src="/landingbg3.png"
               alt="Profesionální lakování auta"
               fill
               className="object-cover"
@@ -64,7 +64,7 @@ export default function HomePage() {
         <div className="relative z-10 container mx-auto px-4 sm:py-32 text-center">
           <ScrollReveal variant="fade-up">
             <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-tight mb-6">
-              Precizní opravy karoserií a laků v Ostravě
+              Precizní lakýrnické a karosářské práce <br /> v Ostravě
             </h1>
           </ScrollReveal>
 
@@ -109,15 +109,17 @@ export default function HomePage() {
           </ScrollReveal>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 text-left">
+
             <ScrollReveal variant="fade-up" delay={0.2}>
-              <ServiceCard icon={<Car size={40} strokeWidth={1.5} />} title="Precizní karosářské práce">
-                Provádíme kompletní opravy karoserií po nehodách. Díky modernímu vybavení garantujeme přesné slícování dílů a navrácení původní pevnosti karoserie.
-              </ServiceCard>
-            </ScrollReveal>
-            
-            <ScrollReveal variant="fade-up" delay={0.3}>
               <ServiceCard icon={<Paintbrush size={40} strokeWidth={1.5} />} title="Profesionální lakování vozů">
                 Zajišťujeme dokonalé lakování. Používáme prémiové laky a vlastní míchárnu barev, abychom zaručili 100% shodu s původním odstínem a dlouhou životnost.
+              </ServiceCard>
+            </ScrollReveal>
+
+
+            <ScrollReveal variant="fade-up" delay={0.3}>
+              <ServiceCard icon={<Car size={40} strokeWidth={1.5} />} title="Precizní karosářské práce">
+                Provádíme kompletní opravy karoserií po nehodách. Díky modernímu vybavení garantujeme přesné slícování dílů a navrácení původní pevnosti karoserie.
               </ServiceCard>
             </ScrollReveal>
             
@@ -194,7 +196,6 @@ export default function HomePage() {
                 beforeAlt="Ford před opravou"
                 afterAlt="Ford po opravě"
                 title="Oprava čelní části Fordu po nehodě"
-                price="15 000 Kč"
               />
             </ScrollReveal>
           </div>
@@ -270,15 +271,15 @@ export default function HomePage() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-5xl mx-auto">
             <ScrollReveal variant="fade-right" delay={0.1}>
               <TestimonialCard 
-                quote="Po nehodě naší firemní dodávky se v P.S.Color postarali o vše. Rychle vyřídili pojistnou událost a díky náhradnímu vozu jsme minimalizovali prostoje. Profesionální přístup, doporučuji." 
-                author="Martin V., jednatel, DAKO STAV s.r.o." 
+                quote="Autolakovnu mi doporučil kamarád a udělal dobře. Oprava proběhla rychle, bez zbytečného čekání, a výsledek je fakt špičkový. Oceňuju i přátelský přístup." 
+                author="Dominik D." 
               />
             </ScrollReveal>
             
             <ScrollReveal variant="fade-left" delay={0.2}>
               <TestimonialCard 
-                quote="Nejlepší servis, jaký jsem zažila. Po srážce se zvěří jsem nemusela řešit vůbec nic – vše zařídili s pojišťovnou a auto mi vrátili v lepším stavu, než bylo předtím. Obrovská úleva a skvělá práce." 
-                author="Jana S., Ostrava-Poruba" 
+                quote="Velká spokojenost! Moje auto které bylo havarované a pojištěné u České pojišťovny, bylo opravené rychle a kvalitně! Doporučuji!" 
+                author="Radomir M." 
               />
             </ScrollReveal>
           </div>

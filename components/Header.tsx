@@ -4,10 +4,17 @@ import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { motion, AnimatePresence } from 'motion/react'
-import { Car, Images, Phone } from 'lucide-react'
+import { Car, Images, Phone, PhoneCall } from 'lucide-react'
 
-// Updated navLinks to ensure hash links always point to the homepage
-const navLinks = [
+type NavLink = {
+  href: string;
+  label: string;
+  icon: React.ReactNode; 
+  isCall?: boolean; 
+};
+
+// Typed navLinks
+const navLinks: NavLink[] = [
   { href: '/#sluzby', label: 'Služby', icon: <Car size={20} /> },
   { href: '/galerie', label: 'Galerie', icon: <Images size={20} /> },
   { href: '/#poptavka', label: 'Kontakt', icon: <Phone size={20} /> },
@@ -51,7 +58,6 @@ export const Header = () => {
               ))}
             </div>
             
-            {/* Updated 'Poptávka' link to point to homepage anchor */}
             <Link 
               href="/#poptavka" 
               className="px-6 py-2 bg-[var(--accent-red)] hover:bg-[var(--accent-red-hover)] text-white font-semibold rounded-full transition-all duration-300 shadow-lg hover:shadow-red-900/20 flex-shrink-0"
@@ -74,6 +80,15 @@ function MobileTopDock() {
   const glassStyle = "bg-white/5 rounded-full bg-clip-padding backdrop-filter backdrop-blur-md bg-opacity-0 shadow-md inset-shadow-sm inset-shadow-white/10"
   const glassdarkStyle = "bg-[var(--bg-dark)] rounded-2xl bg-clip-padding backdrop-filter backdrop-blur-md shadow-md"
 
+  const mobileLinks: NavLink[] = [
+    ...navLinks,
+    { 
+      href: 'tel:+420739522226', 
+      label: 'Zavolat', 
+      icon: <PhoneCall size={20} />,
+      isCall: true 
+    }
+  ]
 
   return (
     <div className="fixed top-4 left-4 right-4 z-50 flex flex-col items-end">
@@ -119,7 +134,7 @@ function MobileTopDock() {
             transition={{ duration: 0.3, ease: [0.23, 1, 0.32, 1] }} 
             className="mt-3 flex flex-col gap-2 w-full max-w-[200px]"
           >
-            {navLinks.map((link, idx) => (
+            {mobileLinks.map((link, idx) => (
               <motion.div
                 key={link.href}
                 initial={{ opacity: 0, x: 20 }}
@@ -130,9 +145,9 @@ function MobileTopDock() {
                 <Link
                   href={link.href}
                   onClick={() => setIsOpen(false)}
-                  className={`flex items-center justify-between gap-4 px-5 py-3 ${glassdarkStyle} group`}
+                  className={`flex items-center justify-between gap-4 px-5 py-3 ${glassdarkStyle} group ${link.isCall ? 'border border-[var(--accent-red)]/30' : ''}`}
                 >
-                  <span className="text-sm font-semibold text-gray-200 group-hover:text-white transition-colors">
+                  <span className={`text-sm font-semibold transition-colors ${link.isCall ? 'text-white' : 'text-gray-200 group-hover:text-white'}`}>
                     {link.label}
                   </span>
                   <div className="text-[var(--accent-red)] group-hover:text-red-400 transition-colors">
