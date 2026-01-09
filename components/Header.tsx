@@ -6,10 +6,11 @@ import Image from 'next/image'
 import { motion, AnimatePresence } from 'motion/react'
 import { Car, Images, Phone } from 'lucide-react'
 
+// Updated navLinks to ensure hash links always point to the homepage
 const navLinks = [
-  { href: '#sluzby', label: 'Služby', icon: <Car size={20} /> },
+  { href: '/#sluzby', label: 'Služby', icon: <Car size={20} /> },
   { href: '/galerie', label: 'Galerie', icon: <Images size={20} /> },
-  { href: '#poptavka', label: 'Kontakt', icon: <Phone size={20} /> },
+  { href: '/#poptavka', label: 'Kontakt', icon: <Phone size={20} /> },
 ]
 
 export const Header = () => {
@@ -30,9 +31,9 @@ export const Header = () => {
               <Image
                 src="/logo.png"
                 alt="Logo P.S.Color"
-                width={140} 
-                height={35} 
-                priority 
+                width={140}
+                height={35}
+                priority
                 className="transition-opacity hover:opacity-80"
               />
             </Link>
@@ -50,8 +51,9 @@ export const Header = () => {
               ))}
             </div>
             
+            {/* Updated 'Poptávka' link to point to homepage anchor */}
             <Link 
-              href="#poptavka" 
+              href="/#poptavka" 
               className="px-6 py-2 bg-[var(--accent-red)] hover:bg-[var(--accent-red-hover)] text-white font-semibold rounded-full transition-all duration-300 shadow-lg hover:shadow-red-900/20 flex-shrink-0"
             >
               Poptávka

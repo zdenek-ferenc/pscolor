@@ -308,9 +308,9 @@ export default function HomePage() {
               <div className="flex justify-center items-center gap-8 flex-wrap">
                 <a 
                   href="tel:+420739522226" 
-                  className="flex items-center gap-3 text-lg font-semibold text-white hover:text-red transition-colors duration-300"
+                  className="flex items-center gap-3 text-xl font-semibold text-white hover:text-red transition-colors duration-300"
                 >
-                  <Phone size={24} />
+                  <Phone size={24} className='text-red' />
                   <span>+420 739 522 226</span>
                 </a>
               </div>
