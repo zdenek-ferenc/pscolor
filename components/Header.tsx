@@ -13,7 +13,6 @@ type NavLink = {
   isCall?: boolean; 
 };
 
-// Typed navLinks
 const navLinks: NavLink[] = [
   { href: '/#sluzby', label: 'Služby', icon: <Car size={20} /> },
   { href: '/galerie', label: 'Galerie', icon: <Images size={20} /> },
@@ -100,6 +99,8 @@ function MobileTopDock() {
             width={110} 
             height={28} 
             priority 
+            loading="eager"
+            fetchPriority="high"
             className="w-auto h-6 object-contain"
           />
         </Link>

@@ -5,6 +5,7 @@
   --bg-darker: #050505;
   
   --accent-red: #DC2626;
+  --accent-red-dark: #961a1a;
   --accent-red-hover: #ee3333;
   
   --accent-blue: #3B82F6;
@@ -84,6 +85,16 @@
   .delay-300 { animation-delay: 0.3s; }
 }
 
+@layer utilities {
+      .no-scrollbar::-webkit-scrollbar {
+          display: none;
+      }
+      .no-scrollbar {
+          -ms-overflow-style: none;  
+          scrollbar-width: none; 
+    }
+  }
+
 @keyframes fadeUp {
   from {
     opacity: 0;
@@ -93,4 +104,9 @@
     opacity: 1;
     transform: translateY(0);
   }
+}
+
+section[id], 
+div[id] {
+  scroll-margin-top: 120px;
 }
