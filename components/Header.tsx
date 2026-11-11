@@ -26,7 +26,7 @@ export const Header = () => {
   const [scrolled, setScrolled] = useState(false)
   const [isOpen, setIsOpen] = useState(false)
 
-  // Header stays put. It only switches from transparent to solid once the page is scrolled.
+  // Plovoucí hlavička: nahoře průhledná, po prvním scrollu dostane rozmazané skleněné pozadí.
   useMotionValueEvent(scrollY, 'change', (y) => setScrolled(y > 8))
 
   useEffect(() => {
@@ -38,15 +38,17 @@ export const Header = () => {
   }, [pathname])
 
   return (
-    <header className="fixed inset-x-0 top-0 z-40">
+    <header className="fixed inset-x-0 top-0 z-40 px-3 pt-3 md:px-6 md:pt-4">
       <div
-        className={`border-b transition-[background-color,border-color,box-shadow] duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] ${
-          scrolled || isOpen
-            ? 'border-line bg-[rgb(11_11_12/0.92)] shadow-[0_8px_30px_rgb(0_0_0/0.35)] backdrop-blur-xl'
-            : 'border-transparent bg-transparent'
+        className={`mx-auto max-w-[1320px] overflow-hidden rounded-[28px] border transition-[background-color,border-color,box-shadow,backdrop-filter] duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] md:rounded-[32px] ${
+          isOpen
+            ? 'border-white/10 bg-[rgb(18_18_20/0.88)] shadow-[0_12px_40px_rgb(0_0_0/0.4),inset_0_1px_0_rgb(255_255_255/0.08)] backdrop-blur-xl'
+            : scrolled
+              ? 'border-white/10 bg-[rgb(18_18_20/0.55)] shadow-[0_12px_40px_rgb(0_0_0/0.35),inset_0_1px_0_rgb(255_255_255/0.08)] backdrop-blur-xl backdrop-saturate-150'
+              : 'border-transparent bg-transparent'
         }`}
       >
-        <nav className="container-x flex h-16 items-center justify-between gap-6 md:grid md:h-[72px] md:grid-cols-[1fr_auto_1fr]">
+        <nav className="flex h-14 items-center justify-between gap-6 pl-4 pr-2 md:grid md:h-16 md:grid-cols-[1fr_auto_1fr] md:px-4">
           <Link href="/" aria-label="Domů" className="flex-shrink-0 md:justify-self-start" onClick={() => setIsOpen(false)}>
             <Image
               src="/logo.png"
@@ -85,7 +87,7 @@ export const Header = () => {
 
           <button
             onClick={() => setIsOpen((v) => !v)}
-            className="md:hidden relative -mr-2 flex h-11 w-11 items-center justify-center rounded-full active:scale-95 transition-transform"
+            className="md:hidden relative flex h-11 w-11 items-center justify-center rounded-full active:scale-95 transition-transform"
             aria-label={isOpen ? 'Zavřít menu' : 'Otevřít menu'}
             aria-expanded={isOpen}
           >
@@ -114,7 +116,7 @@ export const Header = () => {
               transition={{ duration: 0.45, ease }}
               className="md:hidden overflow-hidden"
             >
-              <div className="container-x pb-6 pt-2">
+              <div className="px-4 pb-5 pt-1">
                 <ul className="border-t border-line">
                   {navLinks.map((link, idx) => (
                     <motion.li
