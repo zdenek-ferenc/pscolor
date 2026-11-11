@@ -1,20 +1,48 @@
-import type { Metadata } from 'next'
-import { Urbanist } from 'next/font/google'
+import type { Metadata, Viewport } from 'next'
+import { Geist } from 'next/font/google'
 import './globals.css'
 import { Header } from '@/components/Header'
 import { SmoothScroll } from '@/components/SmoothScroll'
 import { Footer } from '@/components/Footer'
+import { MobileCallButton } from '@/components/MobileCallButton'
+import { SITE_NAME, SITE_URL, localBusinessJsonLd } from '@/lib/site'
 
-const urbanist = Urbanist({ 
-  subsets: ['latin-ext'],
-  variable: '--font-urbanist',
+const geist = Geist({
+  subsets: ['latin', 'latin-ext'],
+  variable: '--font-geist',
   display: 'swap',
-  weight: ['300', '400', '500', '600', '700', '800'],
 })
 
+const description = 'Precizní opravy karoserií a laků v Ostravě. Vrátíme vašemu vozu dokonalý vzhled.'
+
 export const metadata: Metadata = {
-  title: 'P.S.Color | Autolakovna Ostrava',
-  description: 'Precizní opravy karoserií a laků v Ostravě. Vrátíme vašemu vozu dokonalý vzhled.',
+  metadataBase: new URL(SITE_URL),
+  title: {
+    default: 'P.S.Color | Autolakovna Ostrava',
+    template: '%s | P.S.Color Autolakovna Ostrava',
+  },
+  description,
+  alternates: { canonical: '/' },
+  openGraph: {
+    type: 'website',
+    locale: 'cs_CZ',
+    siteName: SITE_NAME,
+    title: 'P.S.Color | Autolakovna Ostrava',
+    description,
+    url: '/',
+    images: [{ url: '/og.jpg', width: 1200, height: 630, alt: 'Lakovací kabina P.S.Color' }],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'P.S.Color | Autolakovna Ostrava',
+    description,
+    images: ['/og.jpg'],
+  },
+}
+
+export const viewport: Viewport = {
+  themeColor: '#0b0b0c',
+  colorScheme: 'dark',
 }
 
 export default function RootLayout({
@@ -23,12 +51,18 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="cs" className={`${urbanist.variable}`}>
-      <body className="bg-darker text-gray-100 antialiased selection:bg-red selection:text-white font-sans">
+    <html lang="cs" className={geist.variable}>
+      <body className="bg-background text-foreground antialiased font-sans">
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessJsonLd) }}
+        />
+        <div id="top" aria-hidden="true" className="absolute top-0 h-px w-px" />
         <SmoothScroll>
           <Header />
           {children}
           <Footer />
+          <MobileCallButton />
         </SmoothScroll>
       </body>
     </html>

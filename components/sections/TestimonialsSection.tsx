@@ -1,34 +1,43 @@
-    'use client'
+'use client'
 
-    import { ScrollReveal } from '@/components/ScrollReveal'
-    import { TestimonialCard } from '@/components/ui/TestimonialCard'
+import { ScrollReveal } from '@/components/ScrollReveal'
+import { TestimonialCard } from '@/components/ui/TestimonialCard'
 
-    export const TestimonialsSection = () => {
-    return (
-        <section className="py-12 md:py-24 bg-[var(--bg-dark)] relative">
-        <div className="container mx-auto px-4">
-            <ScrollReveal variant="fade-up">
-            <h2 className="text-3xl md:text-5xl font-extrabold text-center mb-12 md:mb-16 text-white tracking-tight">
-                Co o nás říkají <span className="text-[var(--accent-red)]">zákazníci</span>
-            </h2>
+const testimonials = [
+  {
+    quote:
+      'Autolakovnu mi doporučil kamarád a udělal dobře. Oprava proběhla rychle, bez zbytečného čekání, a výsledek je fakt špičkový. Oceňuju i přátelský přístup.',
+    author: 'Dominik D.',
+  },
+  {
+    quote:
+      'Velká spokojenost! Moje auto které bylo havarované a pojištěné u České pojišťovny, bylo opravené rychle a kvalitně! Doporučuji!',
+    author: 'Radomír M.',
+  },
+]
+
+export const TestimonialsSection = () => {
+  return (
+    <section className="relative py-20 md:py-32">
+      <div className="container-x">
+        <ScrollReveal>
+          <h2 className="section-title max-w-[16ch]">
+            Co o nás říkají <span className="text-accent">zákazníci</span>
+          </h2>
+        </ScrollReveal>
+
+        <div className="mt-12 grid grid-cols-1 gap-12 md:mt-16 md:grid-cols-2 md:gap-0">
+          {testimonials.map((t, idx) => (
+            <ScrollReveal
+              key={t.author}
+              delay={0.1 * idx}
+              className={idx === 0 ? 'md:pr-12 lg:pr-16' : 'border-t border-line pt-12 md:border-t-0 md:border-l md:pt-0 md:pl-12 lg:pl-16'}
+            >
+              <TestimonialCard quote={t.quote} author={t.author} />
             </ScrollReveal>
-            
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
-            <ScrollReveal variant="fade-right" delay={0.1}>
-                <TestimonialCard 
-                quote="Autolakovnu mi doporučil kamarád a udělal dobře. Oprava proběhla rychle, bez zbytečného čekání, a výsledek je fakt špičkový. Oceňuju i přátelský přístup." 
-                author="Dominik D." 
-                />
-            </ScrollReveal>
-            
-            <ScrollReveal variant="fade-left" delay={0.2}>
-                <TestimonialCard 
-                quote="Velká spokojenost! Moje auto které bylo havarované a pojištěné u České pojišťovny, bylo opravené rychle a kvalitně! Doporučuji!" 
-                author="Radomír M." 
-                />
-            </ScrollReveal>
-            </div>
+          ))}
         </div>
-        </section>
-    )
-    }
+      </div>
+    </section>
+  )
+}

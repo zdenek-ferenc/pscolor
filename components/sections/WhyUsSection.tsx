@@ -1,58 +1,74 @@
 'use client'
 
+import { useRef } from 'react'
 import Image from 'next/image'
-import { CheckCircle2 } from 'lucide-react'
+import { motion, useReducedMotion, useScroll, useTransform } from 'motion/react'
+import { Check } from 'lucide-react'
 import { ScrollReveal } from '@/components/ScrollReveal'
 
+const reasons = [
+  { title: 'Zkušenosti, které mluví za vše', text: 'S více než 15 lety praxe v oboru se nezalekneme žádné výzvy.' },
+  { title: 'Moderní technologie a materiály', text: 'Investujeme do špičkového vybavení a používáme pouze prémiové materiály.' },
+  { title: 'Servis od A do Z bez starostí', text: 'Od nahlášení škody, přes pojišťovnu, po zapůjčení náhradního vozu.' },
+]
+
 export const WhyUsSection = () => {
-    return (
-        <section className="py-20 bg-[var(--bg-darker)] relative overflow-hidden">
-        {/* Decorative Glow */}
-        <div className="absolute top-1/2 left-0 -translate-y-1/2 w-[500px] h-[500px] bg-blue-600/5 rounded-full blur-[120px] pointer-events-none" />
+  const imageRef = useRef<HTMLDivElement>(null)
+  const reduce = useReducedMotion()
+  const { scrollYProgress } = useScroll({ target: imageRef, offset: ['start end', 'end start'] })
+  const y = useTransform(scrollYProgress, [0, 1], reduce ? ['0%', '0%'] : ['-7%', '7%'])
 
-        <div className="container mx-auto px-4 grid lg:grid-cols-2 gap-12 items-center relative z-10">
-            <ScrollReveal variant="fade-right">
-            <div className="relative w-full h-80 lg:h-96 rounded-2xl overflow-hidden shadow-2xl border border-white/5 group">
-                <Image 
-                src="/why.jpg" 
-                alt="Detailní práce na autě" 
-                fill 
-                sizes="(max-width: 1024px) 100vw, 50vw"
+  return (
+    <section className="relative border-t border-line bg-sunken py-20 md:py-32">
+      <div className="container-x grid grid-cols-1 items-center gap-12 lg:grid-cols-12 lg:gap-8">
+        <ScrollReveal className="lg:col-span-5">
+          <div
+            ref={imageRef}
+            className="relative aspect-[4/5] w-full overflow-hidden rounded-[20px] bg-raised max-lg:max-h-[560px] max-lg:aspect-[4/3.6]"
+          >
+            <motion.div style={{ y }} className="absolute -inset-y-[8%] inset-x-0">
+              <Image
+                src="/why.jpg"
+                alt="Detailní práce na autě"
+                fill
+                sizes="(max-width: 1024px) 100vw, 42vw"
                 quality={65}
-                className="object-cover transition-transform duration-700"
-                />
-                <div className="absolute inset-0 bg-black/10 transition-colors duration-500" />
-            </div>
-            </ScrollReveal>
+                className="object-cover"
+              />
+            </motion.div>
+          </div>
+        </ScrollReveal>
 
-            <ScrollReveal variant="fade-left">
-            <div>
-                <h2 className="text-3xl md:text-5xl font-extrabold mb-6 text-[var(--accent-red)] uppercase tracking-tight">
-                Proč svěřit vůz právě nám?
-                </h2>
-                
-                <p className="text-lg md:text-xl text-gray-300 mb-8 leading-relaxed">
-                Naše práce je naší vizitkou. Zakládáme si na preciznosti, transparentnosti a osobním přístupu ke každé zakázce.
-                </p>
+        <div className="lg:col-span-6 lg:col-start-7">
+          <ScrollReveal>
+            <h2 className="section-title max-w-[14ch]">Proč svěřit vůz právě nám?</h2>
+            <p className="mt-6 max-w-[52ch] text-lg leading-relaxed text-muted">
+              Naše práce je naší vizitkou. Zakládáme si na preciznosti, transparentnosti a osobním přístupu ke každé zakázce.
+            </p>
+          </ScrollReveal>
 
-                <ul>
-                {[
-                    { title: 'Zkušenosti, které mluví za vše:', text: 'S více než 15 lety praxe v oboru se nezalekneme žádné výzvy.' },
-                    { title: 'Moderní technologie a materiály:', text: 'Investujeme do špičkového vybavení a používáme pouze prémiové materiály.' },
-                    { title: 'Servis od A do Z bez starostí:', text: 'Od nahlášení škody, přes pojišťovnu, po zapůjčení náhradního vozu.' },
-                ].map((item, idx) => (
-                    <li key={idx} className="flex items-start gap-4 p-4 rounded-xl hover:bg-white/5 transition-colors duration-300 border border-transparent hover:border-white/5">
-                    <CheckCircle2 className="w-6 h-6 md:w-7 md:h-7 text-[var(--accent-red)] flex-shrink-0 mt-1" strokeWidth={2} />
-                    <span className="text-gray-200 md:text-lg">
-                        <span className="font-bold text-white block mb-0.5">{item.title}</span>
-                        <span className="text-gray-400">{item.text}</span>
-                    </span>
-                    </li>
-                ))}
-                </ul>
-            </div>
-            </ScrollReveal>
+          <ul className="mt-10 md:mt-12">
+            {reasons.map((item, idx) => (
+              <ScrollReveal
+                as="li"
+                key={item.title}
+                delay={0.08 * idx}
+                className="group grid grid-cols-[auto_1fr] gap-x-5 border-t border-line py-6 last:border-b"
+              >
+                  <span className="mt-0.5 flex h-7 w-7 items-center justify-center rounded-full bg-accent/12 text-accent ring-1 ring-accent/30 transition-colors duration-300 group-hover:bg-accent group-hover:text-white">
+                    <Check size={15} strokeWidth={2.5} />
+                  </span>
+                  <div>
+                    <h3 className="text-lg font-semibold tracking-[-0.02em] text-foreground md:text-xl">
+                      {item.title}
+                    </h3>
+                    <p className="mt-1.5 leading-relaxed text-muted">{item.text}</p>
+                  </div>
+              </ScrollReveal>
+            ))}
+          </ul>
         </div>
-        </section>
-    )
+      </div>
+    </section>
+  )
 }

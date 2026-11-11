@@ -4,60 +4,65 @@ import Image from 'next/image'
 import { ShieldCheck, Sparkles } from 'lucide-react'
 import { ScrollReveal } from '@/components/ScrollReveal'
 
+const features = [
+  {
+    icon: ShieldCheck,
+    title: 'Dlouhodobá životnost a odolnost',
+    desc: 'Povrch laku je extrémně odolný vůči UV záření, povětrnostním vlivům i běžnému opotřebení.',
+  },
+  {
+    icon: Sparkles,
+    title: 'Perfektní shoda odstínu a lesk',
+    desc: 'Díky digitálnímu spektrometru a rozsáhlé databázi najdeme a namícháme naprosto přesný odstín vaší barvy.',
+  },
+]
+
 export const TechnologySection = () => {
-    return (
-        <section className="py-20 bg-[var(--bg-darker)] relative">
-        <div className="absolute bottom-0 right-0 w-[600px] h-[600px] bg-red-600/5 rounded-full blur-[120px] pointer-events-none" />
+  return (
+    <section className="relative border-t border-line bg-sunken py-20 md:py-32">
+      <div className="container-x">
+        <div className="grid grid-cols-1 items-end gap-12 lg:grid-cols-12 lg:gap-8">
+          <ScrollReveal className="lg:col-span-7">
+            <h2 className="text-[clamp(2.75rem,1.6rem+4.6vw,5.5rem)] font-semibold leading-[0.95] tracking-[-0.05em] text-foreground">
+              Spies Hecker
+            </h2>
+            <p className="mt-8 max-w-[56ch] text-lg leading-relaxed text-muted">
+              Výsledek naší práce musí nejen skvěle vypadat, ale především musí vydržet. Proto se nespoléháme na náhody,
+              ale na systémová řešení od Spies Hecker, německého lídra v oboru lakování.
+            </p>
+            <blockquote className="mt-8 max-w-[48ch] border-l-2 border-accent pl-5 text-lg leading-relaxed text-foreground md:text-xl">
+              Díky jejich technologii a našim zkušenostem máme absolutní kontrolu nad každým detailem procesu.
+            </blockquote>
+          </ScrollReveal>
 
-        <div className="container mx-auto px-4 relative z-10">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <ScrollReveal variant="fade-right">
-                <div>
-                <h2 className="text-4xl md:text-5xl font-extrabold mb-6 text-[var(--accent-red)] tracking-tight">
-                    Spies Hecker
-                </h2>
-                
-                <p className="text-lg text-gray-300 mb-6 leading-relaxed">
-                    Výsledek naší práce musí nejen skvěle vypadat, ale především musí vydržet. Proto se nespoléháme na náhody, 
-                    ale na systémová řešení od Spies Hecker, německého lídra v oboru lakování.
-                </p>
-                
-                <p className="text-lg text-gray-400 mb-8 border-l-4 border-[var(--accent-red)] pl-4 italic">
-                    Díky jejich technologii a našim zkušenostem máme absolutní kontrolu nad každým detailem procesu.
-                </p>
-
-                <div className="space-y-6">
-                    {[
-                    { icon: ShieldCheck, title: 'Dlouhodobá životnost a odolnost', desc: 'Povrch laku je extrémně odolný vůči UV záření, povětrnostním vlivům i běžnému opotřebení.' },
-                    { icon: Sparkles, title: 'Perfektní shoda odstínu a lesk', desc: 'Díky digitálnímu spektrometru a rozsáhlé databázi najdeme a namícháme naprosto přesný odstín vaší barvy.' },
-                    ].map((item, idx) => (
-                    <div key={idx} className="flex items-start gap-4 p-4 glass rounded-xl border border-white/5 hover:border-white/10 transition-colors">
-                        <item.icon className="w-8 h-8 text-[var(--accent-red)] flex-shrink-0 mt-1" strokeWidth={1.5} />
-                        <div>
-                        <h3 className="font-bold text-lg text-white mb-2">{item.title}</h3>
-                        <p className="text-gray-400 leading-relaxed">{item.desc}</p>
-                        </div>
-                    </div>
-                    ))}
-                </div>
-                </div>
-            </ScrollReveal>
-
-            <ScrollReveal variant="fade-left">
-                <div className="relative w-full h-96 lg:h-[500px] rounded-2xl overflow-hidden shadow-2xl border border-white/5">
-                <Image
-                    src="/spies-hecker.jpg" 
-                    alt="Produkty Spies Hecker"
-                    fill
-                    sizes="(max-width: 1024px) 100vw, 50vw"
-                    quality={65}
-                    className="object-cover hover:scale-105 transition-transform duration-700"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent pointer-events-none" />
-                </div>
-            </ScrollReveal>
+          <ScrollReveal delay={0.1} className="lg:col-span-5">
+            <div className="group relative aspect-[565/336] w-full overflow-hidden rounded-[20px] bg-raised">
+              <Image
+                src="/spies-hecker.jpg"
+                alt="Produkty Spies Hecker"
+                fill
+                sizes="(max-width: 1024px) 100vw, 520px"
+                quality={80}
+                className="object-cover transition-transform duration-[1.4s] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.04]"
+              />
             </div>
+          </ScrollReveal>
         </div>
-        </section>
-    )
-    }
+
+        <div className="mt-16 grid grid-cols-1 gap-x-8 md:mt-20 md:grid-cols-2">
+          {features.map((item, idx) => (
+            <ScrollReveal key={item.title} delay={0.08 * idx}>
+              <div className="flex h-full gap-5 border-t border-line-strong pt-8 pb-8 md:pb-0">
+                <item.icon className="mt-1 h-6 w-6 flex-shrink-0 text-accent" strokeWidth={1.75} />
+                <div>
+                  <h3 className="text-xl font-semibold tracking-[-0.02em] text-foreground">{item.title}</h3>
+                  <p className="mt-2 max-w-[46ch] leading-relaxed text-muted">{item.desc}</p>
+                </div>
+              </div>
+            </ScrollReveal>
+          ))}
+        </div>
+      </div>
+    </section>
+  )
+}

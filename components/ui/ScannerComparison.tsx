@@ -1,137 +1,162 @@
 'use client'
 
-import { useState, useRef, useEffect, useCallback } from 'react'
+import { useRef, useEffect, useState } from 'react'
 import Image from 'next/image'
+import {
+  motion,
+  animate,
+  useInView,
+  useMotionValue,
+  useMotionValueEvent,
+  useReducedMotion,
+  useTransform,
+} from 'motion/react'
 import { ChevronLeft, ChevronRight } from 'lucide-react'
 
 interface ScannerComparisonProps {
-    beforeImage: string
-    afterImage: string
-    beforeAlt: string
-    afterAlt: string
-    title: string
-    }
+  beforeImage: string
+  afterImage: string
+  beforeAlt: string
+  afterAlt: string
+  title: string
+}
 
 export const ScannerComparison = ({
-    beforeImage,
-    afterImage,
-    beforeAlt,
-    afterAlt,
-    title,
-    }: ScannerComparisonProps) => {
-    const [sliderPosition, setSliderPosition] = useState(50)
-    const [isDragging, setIsDragging] = useState(false)
-    const containerRef = useRef<HTMLDivElement>(null)
+  beforeImage,
+  afterImage,
+  beforeAlt,
+  afterAlt,
+  title,
+}: ScannerComparisonProps) => {
+  const containerRef = useRef<HTMLDivElement>(null)
+  const draggingRef = useRef(false)
+  const reduce = useReducedMotion()
+  const inView = useInView(containerRef, { once: true, amount: 0.6 })
+  const position = useMotionValue(50)
+  const [ariaValue, setAriaValue] = useState(50)
+  const [isDragging, setIsDragging] = useState(false)
 
-    const calculatePosition = useCallback((clientX: number) => {
-        if (!containerRef.current) return
-        const rect = containerRef.current.getBoundingClientRect()
-        const x = clientX - rect.left
-        const percentage = Math.max(0, Math.min(100, (x / rect.width) * 100))
-        setSliderPosition(percentage)
-    }, [])
+  const clipPath = useTransform(position, (p) => `inset(0 ${100 - p}% 0 0)`)
+  const left = useTransform(position, (p) => `${p}%`)
 
-    const startDragging = () => setIsDragging(true)
-    const stopDragging = () => setIsDragging(false)
+  useMotionValueEvent(position, 'change', (p) => {
+    const rounded = Math.round(p)
+    setAriaValue((prev) => (prev === rounded ? prev : rounded))
+  })
 
-    useEffect(() => {
-        const handleMouseMove = (e: MouseEvent) => {
-        if (isDragging) {
-            e.preventDefault()
-            calculatePosition(e.clientX)
-        }
-        }
+  // Small hint that the image can be dragged, plays once on first view.
+  useEffect(() => {
+    if (!inView || reduce) return
+    const controls = animate(position, [50, 36, 62, 50], {
+      duration: 2.2,
+      ease: [0.65, 0, 0.35, 1],
+      delay: 0.4,
+    })
+    return () => controls.stop()
+  }, [inView, reduce, position])
 
-        const handleTouchMove = (e: TouchEvent) => {
-        if (isDragging) {
-            calculatePosition(e.touches[0].clientX)
-        }
-        }
+  const setFromClientX = (clientX: number) => {
+    const el = containerRef.current
+    if (!el) return
+    const rect = el.getBoundingClientRect()
+    const pct = ((clientX - rect.left) / rect.width) * 100
+    position.stop()
+    position.set(Math.max(0, Math.min(100, pct)))
+  }
 
-        if (isDragging) {
-        window.addEventListener('mousemove', handleMouseMove)
-        window.addEventListener('mouseup', stopDragging)
-        window.addEventListener('touchmove', handleTouchMove)
-        window.addEventListener('touchend', stopDragging)
-        }
+  const onPointerDown = (e: React.PointerEvent<HTMLDivElement>) => {
+    draggingRef.current = true
+    setIsDragging(true)
+    e.currentTarget.setPointerCapture(e.pointerId)
+    setFromClientX(e.clientX)
+  }
 
-        return () => {
-        window.removeEventListener('mousemove', handleMouseMove)
-        window.removeEventListener('mouseup', stopDragging)
-        window.removeEventListener('touchmove', handleTouchMove)
-        window.removeEventListener('touchend', stopDragging)
-        }
-    }, [isDragging, calculatePosition])
+  const onPointerMove = (e: React.PointerEvent<HTMLDivElement>) => {
+    if (!draggingRef.current) return
+    setFromClientX(e.clientX)
+  }
 
-    return (
-        <div className="group select-none">
-        <div 
-            ref={containerRef}
-            className="relative w-full h-64 sm:h-80 md:h-[500px] rounded-2xl overflow-hidden bg-black shadow-2xl border border-white/10 touch-none cursor-ew-resize"
-            onMouseDown={startDragging}
-            onTouchStart={startDragging}
-        >
-            <div className="absolute inset-0">
-            <Image
-                src={afterImage}
-                alt={afterAlt}
-                fill
-                sizes="(max-width: 1024px) 100vw, 1024px"
-                quality={60} 
-                className="object-cover pointer-events-none"
-                draggable={false}
-                priority
-            />
-            <div className="absolute top-3 right-3 md:top-6 md:right-6 px-2 py-1 md:px-4 md:py-2 rounded-2xl border-2 border-red bg-black/60 shadow-lg animate-in fade-in duration-700 flex items-center justify-center">
-                    <span className="text-white font-bold text-[10px] md:text-xs tracking-widest uppercase opacity-90">Po <span className='hidden md:inline-block'>opravě</span> </span>
-                </div>
-            </div>
+  const stop = () => {
+    draggingRef.current = false
+    setIsDragging(false)
+  }
 
-            <div 
-            className="absolute inset-0 will-change-[clip-path]"
-            style={{ clipPath: `inset(0 ${100 - sliderPosition}% 0 0)` }}
-            >
-            <Image
-                src={beforeImage}
-                alt={beforeAlt}
-                fill
-                sizes="(max-width: 1024px) 100vw, 1024px"
-                quality={60}
-                className="object-cover pointer-events-none"
-                draggable={false}
-                priority
-                />
-                <div className="absolute top-3 left-3 md:top-6 md:left-6 px-2 py-1 md:px-4 md:py-2 bg-black/30 backdrop-blur-md  rounded-2xl shadow-lg border-2 border-blue-800 flex items-center justify-center">
-                    <span className="text-white font-bold text-[10px] md:text-xs tracking-widest uppercase">Před <span className='hidden md:inline-block'>opravou</span> </span>
-                </div>
-            </div>
-
-            <div
-                className="absolute top-0 bottom-0 w-1 bg-black/90 backdrop-blur-sm z-20 pointer-events-none"
-                style={{ left: `${sliderPosition}%` }}
-                >
-                <div className="absolute inset-0 bg-black blur-[4px]" />
-                </div>
-
-            <div 
-                className="absolute top-4/7 -translate-y-1/2 ml-0.5 z-30 pointer-events-none flex items-center justify-center"
-                style={{ left: `${sliderPosition}%`, transform: 'translate(-50%, -50%)' }}
-                >
-                <div className={`md:w-10 w-8 md:h-10 h-8 rounded-xl bg-red flex items-center justify-center transition-transform duration-200 ${isDragging ? 'scale-110 border-[var(--accent-red)]/50' : ''}`}>
-                    <ChevronLeft className={`w-5 h-5 transition-colors  duration-300 ${isDragging ? 'text-white/50' : 'text-white'}`} />
-                    <ChevronRight className={`w-5 h-5 transition-colors  duration-300 ${isDragging ? 'text-white/50' : 'text-white'}`} />
-                </div>
-            </div>
-        </div>
-
-        <div className="mt-6 text-center">
-            <h3 className="text-xl md:text-2xl font-bold text-white mb-2 tracking-tight">
-            {title}
-            </h3>
-            <p className="text-sm text-gray-300 font-medium">
-            Tažením porovnejte rozdíl
-            </p>
-        </div>
-        </div>
-    )
+  const onKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
+    const step = e.shiftKey ? 10 : 4
+    if (e.key === 'ArrowLeft') {
+      e.preventDefault()
+      position.set(Math.max(0, position.get() - step))
+    } else if (e.key === 'ArrowRight') {
+      e.preventDefault()
+      position.set(Math.min(100, position.get() + step))
     }
+  }
+
+  return (
+    <figure className="select-none">
+      <div
+        ref={containerRef}
+        role="slider"
+        tabIndex={0}
+        aria-label={`${title}: porovnání před a po opravě`}
+        aria-valuemin={0}
+        aria-valuemax={100}
+        aria-valuenow={ariaValue}
+        onPointerDown={onPointerDown}
+        onPointerMove={onPointerMove}
+        onPointerUp={stop}
+        onPointerCancel={stop}
+        onKeyDown={onKeyDown}
+        className="relative aspect-[4/3] w-full cursor-ew-resize touch-pan-y overflow-hidden rounded-[20px] bg-raised sm:aspect-[16/10]"
+      >
+        <Image
+          src={afterImage}
+          alt={afterAlt}
+          fill
+          sizes="(max-width: 960px) 100vw, 920px"
+          quality={65}
+          className="pointer-events-none object-cover"
+          draggable={false}
+        />
+
+        <motion.div className="absolute inset-0 will-change-[clip-path]" style={{ clipPath }}>
+          <Image
+            src={beforeImage}
+            alt={beforeAlt}
+            fill
+            sizes="(max-width: 960px) 100vw, 920px"
+            quality={65}
+            className="pointer-events-none object-cover"
+            draggable={false}
+          />
+        </motion.div>
+
+        <span className="pointer-events-none absolute bottom-4 left-4 rounded-full bg-black/55 px-3 py-1.5 text-xs font-medium text-white backdrop-blur-md md:bottom-6 md:left-6 md:text-sm">
+          Před opravou
+        </span>
+        <span className="pointer-events-none absolute bottom-4 right-4 rounded-full bg-white/90 px-3 py-1.5 text-xs font-medium text-[#0b0b0c] backdrop-blur-md md:bottom-6 md:right-6 md:text-sm">
+          Po opravě
+        </span>
+
+        <motion.div
+          className="pointer-events-none absolute inset-y-0 z-20 w-px -translate-x-1/2 bg-white/90 shadow-[0_0_0_1px_rgb(0_0_0/0.15)]"
+          style={{ left }}
+        />
+        <motion.div
+          className="pointer-events-none absolute top-1/2 z-30 -translate-x-1/2 -translate-y-1/2"
+          style={{ left }}
+        >
+          <div
+            className={`flex h-11 w-11 items-center justify-center gap-0.5 rounded-full bg-white text-[#0b0b0c] shadow-[0_8px_30px_rgb(0_0_0/0.35)] transition-transform duration-300 md:h-12 md:w-12 ${
+              isDragging ? 'scale-110' : ''
+            }`}
+          >
+            <ChevronLeft size={16} strokeWidth={2.5} />
+            <ChevronRight size={16} strokeWidth={2.5} />
+          </div>
+        </motion.div>
+      </div>
+      <figcaption className="sr-only">{title}</figcaption>
+    </figure>
+  )
+}

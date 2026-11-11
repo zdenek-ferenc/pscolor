@@ -1,129 +1,134 @@
 'use client'
 
-import { Phone, Mail, MapPin, Navigation } from 'lucide-react'
+import { Phone, Mail, MapPin, Navigation, ArrowUpRight, Clock } from 'lucide-react'
 import { ScrollReveal } from '@/components/ScrollReveal'
 import { ContactForm } from '@/components/ContactForm'
 
 export const CtaSection = () => {
-    // Odkaz pro tlačítko "Navigovat" (otevře aplikaci Google Maps v novém okně - to je OK)
-    const mapLink = "https://www.google.com/maps/search/?api=1&query=Novovesk%C3%A1+95%2F11%2C+709+00+Ostrava"
-    
-    // Embed odkaz pro OpenStreetMap (přesné souřadnice vaší dílny)
-    // bbox = ohraničení (zoom), marker = špendlík
-    const mapEmbedSrc = "https://www.openstreetmap.org/export/embed.html?bbox=18.2460%2C49.8310%2C18.2540%2C49.8360&layer=mapnik&marker=49.83367%2C18.25002"
+  // Odkaz pro tlačítko "Navigovat" (otevře aplikaci Google Maps v novém okně)
+  const mapLink = 'https://www.google.com/maps/search/?api=1&query=Novovesk%C3%A1+95%2F11%2C+709+00+Ostrava'
 
-    return (
-        <section id="poptavka" className="py-12 md:py-24 bg-[var(--bg-dark)] relative border-t border-white/5">
-            {/* Background Glow */}
-            <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-red-600/5 rounded-full blur-[150px] pointer-events-none" />
+  // Embed odkaz pro OpenStreetMap (přesné souřadnice dílny), bez cookies
+  const mapEmbedSrc =
+    'https://www.openstreetmap.org/export/embed.html?bbox=18.2460%2C49.8310%2C18.2540%2C49.8360&layer=mapnik&marker=49.83367%2C18.25002'
 
-            <div className="container mx-auto px-4 relative z-10">
-                <ScrollReveal variant="fade-up">
-                    <div className="text-center mb-12 md:mb-16">
-                        <h2 className="text-4xl md:text-6xl font-extrabold mb-6 md:mb-8 tracking-tight">
-                            <span className="block text-white">Získejte nezávaznou</span>
-                            <span className="block text-[var(--accent-red)] mt-2">cenovou nabídku</span>
-                        </h2>
-                        <p className="md:text-lg text-gray-300 max-w-2xl mx-auto leading-relaxed">
-                            Vyplňte formulář a nahrajte fotku poškození. Ozveme se vám do 24 hodin s odhadem ceny a časovým rámcem opravy.
-                        </p>
-                    </div>
-                </ScrollReveal>
+  return (
+    <section id="poptavka" className="relative border-t border-line bg-sunken py-20 md:py-32">
+      <div className="container-x grid grid-cols-1 gap-10 lg:grid-cols-12 lg:grid-rows-[auto_1fr] lg:gap-x-8 lg:gap-y-12">
+        {/* Nadpis */}
+        <ScrollReveal className="lg:col-span-5">
+          <h2 className="text-[clamp(2.25rem,1.4rem+2.4vw,3rem)] font-semibold leading-[1] tracking-[-0.045em]">
+            <span className="block text-foreground">Získejte nezávaznou</span>
+            <span className="block text-accent">cenovou nabídku</span>
+          </h2>
+          <p className="mt-6 max-w-[46ch] text-lg leading-relaxed text-muted">
+            Vyplňte formulář a nahrajte fotku poškození. Ozveme se vám do 24 hodin s odhadem ceny a časovým rámcem opravy.
+          </p>
+        </ScrollReveal>
 
-                <div className="grid lg:grid-cols-5 gap-12 max-w-6xl mx-auto">
-            
-                    {/* LEVÝ SLOUPEC (Kontakt + Mapa) */}
-                    <div className="lg:col-span-2 flex flex-col gap-6 justify-start order-2 lg:order-1">
-                        
-                        {/* 1. Karta s kontakty */}
-                        <ScrollReveal variant="fade-right">
-                            <div className="p-6 md:p-8 glass rounded-2xl border border-white/5">
-                                <h3 className="text-lg md:text-xl font-bold text-white mb-6">Rychlý kontakt</h3>
-                                
-                                <div className="space-y-6">
-                                    <a href="tel:+420739522226" className="flex items-center gap-4 text-gray-300 hover:text-white transition-colors group">
-                                        <div className="md:w-12 w-10 md:h-12 h-10 rounded-full bg-white/5 flex items-center justify-center group-hover:bg-[var(--accent-red)] transition-colors border border-white/5 group-hover:border-[var(--accent-red)]/50">
-                                            <Phone size={22} className="text-[var(--accent-red)] group-hover:text-white transition-colors" />
-                                        </div>
-                                        <div>
-                                            <p className="text-sm text-gray-300 font-medium">Zavolejte nám</p>
-                                            <p className="text-lg font-bold tracking-wide">+420 739 522 226</p>
-                                        </div>
-                                    </a>
+        {/* Formulář */}
+        <ScrollReveal delay={0.1} className="lg:col-span-7 lg:col-start-6 lg:row-span-2 lg:pl-6 xl:pl-10">
+          <div className="rounded-[20px] border border-line bg-raised p-5 sm:p-8 md:p-10">
+            <ContactForm />
+          </div>
+        </ScrollReveal>
 
-                                    <a href="mailto:info@pscolor.cz" className="flex items-center gap-4 text-gray-300 hover:text-white transition-colors group">
-                                        <div className="md:w-12 w-10 md:h-12 h-10 rounded-full bg-white/5 flex items-center justify-center group-hover:bg-[var(--accent-red)] transition-colors border border-white/5 group-hover:border-[var(--accent-red)]/50">
-                                            <Mail size={22} className="text-[var(--accent-red)] group-hover:text-white transition-colors" />
-                                        </div>
-                                        <div>
-                                            <p className="text-sm text-gray-300 font-medium">Napište nám</p>
-                                            <p className="text-lg font-bold tracking-wide">info@pscolor.cz</p> 
-                                        </div>
-                                    </a>
-                                </div>
-                            </div>
-                        </ScrollReveal>
-
-                        {/* 2. Karta s mapou (OpenStreetMap bez cookies) */}
-                        <ScrollReveal variant="fade-right" delay={0.1}>
-                            <div className="h-full glass rounded-2xl border border-white/5 overflow-hidden flex flex-col min-h-[300px]">
-                                <div className="p-6 border-b border-white/5 bg-white/[0.02]">
-                                    <div className="flex flex-col md:flex-row items-start gap-4">
-                                        <div className="w-10 h-10 rounded-full bg-[var(--accent-red)]/10 flex items-center justify-center flex-shrink-0 mt-1">
-                                            <MapPin size={20} className="text-[var(--accent-red)]" />
-                                        </div>
-                                        <div>
-                                            <h3 className="text-lg font-bold text-white mb-1">Kde nás najdete</h3>
-                                            <p className="text-gray-400 text-sm leading-relaxed mb-3">
-                                                Novoveská 95/11<br />
-                                                709 00 Ostrava
-                                            </p>
-                                            <a 
-                                                href={mapLink}
-                                                target="_blank"
-                                                rel="noopener noreferrer"
-                                                className="inline-flex items-center gap-2 text-xs font-bold text-white bg-black/50 backdrop-blur-sm px-2 py-1 rounded-lg border border-white hover:text-red uppercase tracking-wider transition-colors"
-                                            >
-                                                <Navigation size={14} />
-                                                Navigovat
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                                
-                                {/* Map Container - OpenStreetMap */}
-                                <div className="relative w-full flex-grow min-h-[250px] bg-[#242f3e]">
-                                    <iframe 
-                                        src={mapEmbedSrc}
-                                        width="100%" 
-                                        height="100%" 
-                                        // CSS Filtry pro Dark Mode efekt na OSM mapě
-                                        style={{ border: 0, filter: "grayscale(1) invert(1) contrast(0.85) brightness(0.9)" }} 
-                                        allowFullScreen 
-                                        loading="lazy" 
-                                        title="Mapa PS Color"
-                                        className="absolute inset-0 opacity-80 hover:opacity-100 transition-opacity duration-500"
-                                    ></iframe>
-                                    
-                                    {/* Overlay pro sjednocení barvy */}
-                                    <div className="absolute inset-0 bg-[var(--accent-red)] mix-blend-overlay opacity-10 pointer-events-none" />
-                                </div>
-                            </div>
-                        </ScrollReveal>
-
-                    </div>
-
-                    {/* PRAVÝ SLOUPEC (Formulář) */}
-                    <div className="lg:col-span-3 order-1 lg:order-2">
-                        <ScrollReveal variant="fade-up" delay={0.2}>
-                            <div className="glass p-1 rounded-2xl border border-white/10 shadow-2xl bg-black/40 h-full">
-                                <ContactForm />
-                            </div>
-                        </ScrollReveal>
-                    </div>
-
+        {/* Kontakty + mapa */}
+        <ScrollReveal delay={0.15} className="lg:col-span-5 lg:row-start-2">
+          <div className="flex flex-col gap-8">
+            <div>
+              <h3 className="text-sm font-medium text-dim">Rychlý kontakt</h3>
+              <div className="mt-4 divide-y divide-line border-y border-line">
+                <a href="tel:+420739522226" className="group flex items-center justify-between gap-4 py-5">
+                  <span className="flex items-center gap-4">
+                    <Phone size={20} strokeWidth={1.75} className="text-accent" />
+                    <span>
+                      <span className="block text-sm text-muted">Zavolejte nám</span>
+                      <span className="block tabular-nums text-lg font-medium tracking-tight text-foreground md:text-xl">
+                        +420 739 522 226
+                      </span>
+                    </span>
+                  </span>
+                  <ArrowUpRight
+                    size={20}
+                    strokeWidth={1.5}
+                    className="text-dim transition-all duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-foreground"
+                  />
+                </a>
+                <a href="mailto:info@pscolor.cz" className="group flex items-center justify-between gap-4 py-5">
+                  <span className="flex items-center gap-4">
+                    <Mail size={20} strokeWidth={1.75} className="text-accent" />
+                    <span>
+                      <span className="block text-sm text-muted">Napište nám</span>
+                      <span className="block text-lg font-medium tracking-tight text-foreground md:text-xl">
+                        info@pscolor.cz
+                      </span>
+                    </span>
+                  </span>
+                  <ArrowUpRight
+                    size={20}
+                    strokeWidth={1.5}
+                    className="text-dim transition-all duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-foreground"
+                  />
+                </a>
+                <div className="flex items-start gap-4 py-5">
+                  <Clock size={20} strokeWidth={1.75} className="mt-0.5 text-accent" />
+                  <div className="flex-1">
+                    <span className="block text-sm text-muted">Otevírací doba</span>
+                    <dl className="mt-1 space-y-0.5 text-foreground">
+                      <div className="flex justify-between gap-6">
+                        <dt>Po - Pá</dt>
+                        <dd className="tabular-nums font-medium">8:00 - 17:00</dd>
+                      </div>
+                      <div className="flex justify-between gap-6">
+                        <dt>Víkendy</dt>
+                        <dd className="text-muted">Zavřeno</dd>
+                      </div>
+                    </dl>
+                  </div>
                 </div>
+              </div>
             </div>
-        </section>
-    )
+
+            <div className="overflow-hidden rounded-[20px] border border-line bg-raised">
+              <div className="relative h-56 w-full bg-[#1a1a1d] md:h-64">
+                <iframe
+                  src={mapEmbedSrc}
+                  width="100%"
+                  height="100%"
+                  style={{ border: 0, filter: 'grayscale(1) invert(0.92) contrast(0.9) brightness(0.85)' }}
+                  allowFullScreen
+                  loading="lazy"
+                  title="Mapa PS Color"
+                  className="absolute inset-0"
+                />
+              </div>
+              <div className="flex flex-wrap items-center justify-between gap-4 p-5 md:p-6">
+                <div className="flex items-start gap-3">
+                  <MapPin size={20} strokeWidth={1.75} className="mt-0.5 flex-shrink-0 text-accent" />
+                  <div>
+                    <h3 className="font-semibold text-foreground">Kde nás najdete</h3>
+                    <p className="mt-1 text-sm leading-relaxed text-muted">
+                      Novoveská 95/11
+                      <br />
+                      709 00 Ostrava
+                    </p>
+                  </div>
+                </div>
+                <a
+                  href={mapLink}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn btn-ghost !h-10 !px-4 !text-sm"
+                >
+                  <Navigation size={15} strokeWidth={2} />
+                  Navigovat
+                </a>
+              </div>
+            </div>
+          </div>
+        </ScrollReveal>
+      </div>
+    </section>
+  )
 }
