@@ -2,7 +2,7 @@
 
 import { useRef } from 'react'
 import Image from 'next/image'
-import { motion, useReducedMotion, useScroll, useTransform } from 'motion/react'
+import { m, useReducedMotion, useScroll, useTransform } from 'motion/react'
 import { Check } from 'lucide-react'
 import { ScrollReveal } from '@/components/ScrollReveal'
 
@@ -19,23 +19,23 @@ export const WhyUsSection = () => {
   const y = useTransform(scrollYProgress, [0, 1], reduce ? ['0%', '0%'] : ['-7%', '7%'])
 
   return (
-    <section className="relative border-t border-line bg-sunken py-20 md:py-32">
+    <section className="relative border-t border-line bg-sunken py-16 md:py-32">
       <div className="container-x grid grid-cols-1 items-center gap-12 lg:grid-cols-12 lg:gap-8">
         <ScrollReveal className="lg:col-span-5">
           <div
             ref={imageRef}
             className="relative aspect-[4/5] w-full overflow-hidden rounded-[20px] bg-raised max-lg:max-h-[560px] max-lg:aspect-[4/3.6]"
           >
-            <motion.div style={{ y }} className="absolute -inset-y-[8%] inset-x-0">
+            <m.div style={{ y }} className="absolute -inset-y-[8%] inset-x-0">
               <Image
-                src="/why.jpg"
+                src="/why.webp"
                 alt="Detailní práce na autě"
                 fill
                 sizes="(max-width: 1024px) 100vw, 42vw"
                 quality={65}
                 className="object-cover"
               />
-            </motion.div>
+            </m.div>
           </div>
         </ScrollReveal>
 

@@ -2,7 +2,7 @@
 
 import { useState, FormEvent, ChangeEvent, useRef, useEffect } from 'react'
 import Image from 'next/image'
-import { motion, AnimatePresence } from 'motion/react'
+import { m, AnimatePresence } from 'motion/react'
 import { Upload, ArrowRight, Check, ChevronDown, Search, AlertCircle } from 'lucide-react'
 import { compressImage } from '@/lib/compressImage'
 
@@ -240,7 +240,7 @@ export const ContactForm = () => {
 
             <AnimatePresence>
               {isDropdownOpen && (
-                <motion.div
+                <m.div
                   initial={{ opacity: 0, y: -6, scale: 0.98 }}
                   animate={{ opacity: 1, y: 0, scale: 1 }}
                   exit={{ opacity: 0, y: -6, scale: 0.98 }}
@@ -301,7 +301,7 @@ export const ContactForm = () => {
                       <div className="p-4 text-center text-sm text-muted">Žádná země nenalezena</div>
                     )}
                   </div>
-                </motion.div>
+                </m.div>
               )}
             </AnimatePresence>
           </div>
@@ -422,7 +422,7 @@ export const ContactForm = () => {
 
         <AnimatePresence>
           {error && (
-            <motion.p
+            <m.p
               role="alert"
               initial={{ opacity: 0, height: 0 }}
               animate={{ opacity: 1, height: 'auto' }}
@@ -431,7 +431,7 @@ export const ContactForm = () => {
             >
               <AlertCircle size={16} className="mt-0.5 flex-shrink-0" />
               {error}
-            </motion.p>
+            </m.p>
           )}
         </AnimatePresence>
 

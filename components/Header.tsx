@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { usePathname } from 'next/navigation'
-import { motion, AnimatePresence, useScroll, useMotionValueEvent } from 'motion/react'
+import { m, AnimatePresence, useScroll, useMotionValueEvent } from 'motion/react'
 import { ArrowUpRight, PhoneCall } from 'lucide-react'
 
 type NavLink = {
@@ -92,12 +92,12 @@ export const Header = () => {
             aria-expanded={isOpen}
           >
             <span className="relative block h-3 w-6">
-              <motion.span
+              <m.span
                 animate={isOpen ? { rotate: 45, y: 5 } : { rotate: 0, y: 0 }}
                 transition={{ duration: 0.35, ease }}
                 className="absolute left-0 top-0 h-[1.5px] w-6 rounded-full bg-foreground"
               />
-              <motion.span
+              <m.span
                 animate={isOpen ? { rotate: -45, y: -5, width: 24 } : { rotate: 0, y: 0, width: 16 }}
                 transition={{ duration: 0.35, ease }}
                 className="absolute right-0 bottom-0 h-[1.5px] rounded-full bg-foreground"
@@ -108,7 +108,7 @@ export const Header = () => {
 
         <AnimatePresence initial={false}>
           {isOpen && (
-            <motion.div
+            <m.div
               key="mobile-menu"
               initial={{ height: 0, opacity: 0 }}
               animate={{ height: 'auto', opacity: 1 }}
@@ -119,7 +119,7 @@ export const Header = () => {
               <div className="px-4 pb-5 pt-1">
                 <ul className="border-t border-line">
                   {navLinks.map((link, idx) => (
-                    <motion.li
+                    <m.li
                       key={link.href}
                       initial={{ opacity: 0, y: -8 }}
                       animate={{ opacity: 1, y: 0 }}
@@ -134,10 +134,10 @@ export const Header = () => {
                         {link.label}
                         <ArrowUpRight size={20} strokeWidth={1.5} className="text-dim" />
                       </Link>
-                    </motion.li>
+                    </m.li>
                   ))}
                 </ul>
-                <motion.div
+                <m.div
                   initial={{ opacity: 0, y: -8 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.25, duration: 0.4, ease }}
@@ -150,9 +150,9 @@ export const Header = () => {
                   <Link href="/#poptavka" onClick={() => setIsOpen(false)} className="btn btn-primary w-full">
                     Poptávka
                   </Link>
-                </motion.div>
+                </m.div>
               </div>
-            </motion.div>
+            </m.div>
           )}
         </AnimatePresence>
       </div>

@@ -1,5 +1,3 @@
-'use client'
-
 import Link from 'next/link'
 import { ArrowRight } from 'lucide-react'
 import { ScrollReveal } from '@/components/ScrollReveal'
@@ -7,7 +5,7 @@ import { ScannerComparison } from '@/components/ui/ScannerComparison'
 
 export const WorkShowcaseSection = () => {
   return (
-    <section className="relative py-20 md:py-32">
+    <section className="relative py-16 md:py-32">
       <div className="container-x">
         <ScrollReveal>
           <div className="mx-auto max-w-2xl text-center">
@@ -21,17 +19,17 @@ export const WorkShowcaseSection = () => {
         <div className="mx-auto mt-12 max-w-[920px] md:mt-16">
           <ScrollReveal delay={0.1}>
             <ScannerComparison
-              beforeImage="/ford1.jpg"
-              afterImage="/ford2.jpg"
+              beforeImage="/ford-before.webp"
+              afterImage="/ford-after.webp"
               beforeAlt="Ford před opravou"
               afterAlt="Ford po opravě"
               title="Oprava čelní části Fordu po nehodě"
+              afterAlign={{ transform: 'scale(1.26) rotate(-3deg)', origin: '45% 91%' }}
             />
           </ScrollReveal>
 
           <ScrollReveal delay={0.1}>
-            <div className="mt-6 flex flex-col items-start justify-between gap-5 sm:flex-row sm:items-center">
-              <p className="text-base text-muted">Oprava čelní části Fordu po nehodě</p>
+            <div className="mt-6 flex justify-end">
               <Link href="/galerie" className="btn btn-ghost">
                 Prohlédnout celou galerii
                 <ArrowRight size={18} strokeWidth={2} className="btn-arrow" />

@@ -1,5 +1,3 @@
-'use client'
-
 import Image from 'next/image'
 import { ShieldCheck, Sparkles } from 'lucide-react'
 import { ScrollReveal } from '@/components/ScrollReveal'
@@ -19,7 +17,7 @@ const features = [
 
 export const TechnologySection = () => {
   return (
-    <section className="relative border-t border-line bg-sunken py-20 md:py-32">
+    <section className="relative border-t border-line bg-sunken py-16 md:py-32">
       <div className="container-x">
         <div className="grid grid-cols-1 items-end gap-12 lg:grid-cols-12 lg:gap-8">
           <ScrollReveal className="lg:col-span-7">

@@ -228,6 +228,49 @@ select {
   scroll-margin-top: 112px;
 }
 
+/* Hero intro: plain CSS so it starts with the first paint instead of after hydration. */
+@keyframes hero-line {
+  from { transform: translate3d(0, 105%, 0); }
+  to { transform: none; }
+}
+@keyframes hero-fade {
+  from { opacity: 0; transform: translate3d(0, 16px, 0); }
+  to { opacity: 1; transform: none; }
+}
+@keyframes hero-photo {
+  from { transform: scale(1.08); }
+  to { transform: none; }
+}
+.hero-line { animation: hero-line 1s var(--ease-out) both; }
+.hero-fade { animation: hero-fade 0.8s var(--ease-out) both; }
+.hero-photo { animation: hero-photo 1.8s var(--ease-out) both; }
+
+/* Scroll reveal (components/ScrollReveal.tsx adds .is-visible). */
+.reveal {
+  opacity: 0;
+  transform: translate3d(0, 28px, 0);
+  transition:
+    opacity 0.8s var(--ease-out),
+    transform 0.8s var(--ease-out);
+  transition-delay: var(--reveal-delay, 0s);
+}
+.reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    opacity: 1;
+    transform: none;
+  }
+  .hero-line,
+  .hero-fade,
+  .hero-photo {
+    animation: none;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,

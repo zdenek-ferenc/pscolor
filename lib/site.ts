@@ -4,6 +4,14 @@ export const SITE_URL = (process.env.NEXT_PUBLIC_SITE_URL || 'https://www.pscolo
 
 export const SITE_NAME = 'P.S.Color'
 
+// Profil P.S. COLOR s.r.o. na Mapách Google, odkaz otevírá rovnou záložku Recenze.
+// Hodnocení a počet recenzí je třeba občas ručně aktualizovat (stav 11/2026: 5,0 ze 7).
+export const GOOGLE_REVIEWS = {
+  url: 'https://www.google.com/maps/place/P.S.+COLOR+s.r.o./@49.8335777,18.2497059,17z/data=!4m8!3m7!1s0x4713e3ebbf0586bd:0xfd25f93973cfda0a!8m2!3d49.8335777!4d18.2497059!9m1!1b1!16s%2Fg%2F11kpl3drsm',
+  rating: '5,0',
+  count: 7,
+}
+
 export const localBusinessJsonLd = {
   '@context': 'https://schema.org',
   '@type': 'AutoBodyShop',

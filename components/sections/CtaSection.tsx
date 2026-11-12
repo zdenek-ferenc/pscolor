@@ -1,5 +1,3 @@
-'use client'
-
 import { Phone, Mail, MapPin, Navigation, ArrowUpRight, Clock } from 'lucide-react'
 import { ScrollReveal } from '@/components/ScrollReveal'
 import { ContactForm } from '@/components/ContactForm'
@@ -13,7 +11,7 @@ export const CtaSection = () => {
     'https://www.openstreetmap.org/export/embed.html?bbox=18.2460%2C49.8310%2C18.2540%2C49.8360&layer=mapnik&marker=49.83367%2C18.25002'
 
   return (
-    <section id="poptavka" className="relative border-t border-line bg-sunken py-20 md:py-32">
+    <section id="poptavka" className="relative border-t border-line bg-sunken py-16 md:py-32">
       <div className="container-x grid grid-cols-1 gap-10 lg:grid-cols-12 lg:grid-rows-[auto_1fr] lg:gap-x-8 lg:gap-y-12">
         {/* Nadpis */}
         <ScrollReveal className="lg:col-span-5">

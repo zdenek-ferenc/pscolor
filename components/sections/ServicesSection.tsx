@@ -1,5 +1,3 @@
-'use client'
-
 import Image from 'next/image'
 import { Paintbrush, Car, FileText } from 'lucide-react'
 import { ScrollReveal } from '@/components/ScrollReveal'
@@ -64,7 +62,7 @@ export const ServicesSection = () => {
   const [paint, body, insurance] = services
 
   return (
-    <section id="sluzby" className="relative py-20 md:py-32">
+    <section id="sluzby" className="relative pt-16 pb-16 md:pt-24 md:pb-32">
       <div className="container-x">
         <ScrollReveal>
           <div className="max-w-2xl">
@@ -108,9 +106,16 @@ export const ServicesSection = () => {
 
           <ScrollReveal delay={0.16} className="lg:col-span-5">
             <article className="group relative h-full min-h-[300px] overflow-hidden rounded-[20px] bg-accent">
-              <div className="absolute inset-0 bg-[radial-gradient(120%_90%_at_100%_0%,rgb(255_255_255/0.18),transparent_55%)]" />
-              <div className="absolute -bottom-24 -right-16 h-72 w-72 rounded-full border border-white/15 transition-transform duration-[1.2s] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-110" />
-              <div className="absolute -bottom-10 -right-2 h-44 w-44 rounded-full border border-white/15 transition-transform duration-[1.2s] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-110" />
+              <Image
+                src="/photos/2.webp"
+                alt="Zamaskovaný vůz připravený k lakování"
+                fill
+                sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 42vw"
+                quality={60}
+                className="object-cover object-[50%_45%] grayscale contrast-125 transition-transform duration-[1.4s] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.04]"
+              />
+              <div className="absolute inset-0 bg-accent mix-blend-multiply" />
+              <div className="absolute inset-0 bg-accent/40" />
               <TileBody service={insurance} onAccent />
             </article>
           </ScrollReveal>

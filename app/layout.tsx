@@ -2,7 +2,7 @@ import type { Metadata, Viewport } from 'next'
 import { Geist } from 'next/font/google'
 import './globals.css'
 import { Header } from '@/components/Header'
-import { SmoothScroll } from '@/components/SmoothScroll'
+import { Providers } from '@/components/Providers'
 import { Footer } from '@/components/Footer'
 import { MobileCallButton } from '@/components/MobileCallButton'
 import { SITE_NAME, SITE_URL, localBusinessJsonLd } from '@/lib/site'
@@ -58,12 +58,16 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessJsonLd) }}
         />
         <div id="top" aria-hidden="true" className="absolute top-0 h-px w-px" />
-        <SmoothScroll>
+        {/* Bez JavaScriptu nic nezůstane schované za scroll animací. */}
+        <noscript>
+          <style>{'.reveal{opacity:1!important;transform:none!important}'}</style>
+        </noscript>
+        <Providers>
           <Header />
           {children}
           <Footer />
           <MobileCallButton />
-        </SmoothScroll>
+        </Providers>
       </body>
     </html>
   )

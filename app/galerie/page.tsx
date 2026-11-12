@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useCallback, useRef } from 'react'
 import Image from 'next/image'
-import { motion, AnimatePresence, useReducedMotion } from 'motion/react'
+import { m, AnimatePresence, useReducedMotion } from 'motion/react'
 import { X, Plus, ChevronLeft, ChevronRight } from 'lucide-react'
 
 // Natural pixel ratios of the photos in /public/photos (keeps the masonry layout CLS-free).
@@ -127,27 +127,27 @@ export default function GalleryPage() {
       <main className="flex-grow pt-32 pb-24 md:pt-40 md:pb-32">
         <div className="container-x">
           <div className="max-w-3xl">
-            <motion.p {...fadeUp(0)} className="text-sm font-medium text-dim">
+            <m.p {...fadeUp(0)} className="text-sm font-medium text-dim">
               Fotogalerie
-            </motion.p>
+            </m.p>
             <h1 className="mt-4 overflow-hidden pb-[0.06em] text-[clamp(2.75rem,1.6rem+4.6vw,5.5rem)] font-semibold leading-[0.98] tracking-[-0.05em]">
-              <motion.span
+              <m.span
                 className="block"
                 initial={reduce ? false : { y: '105%' }}
                 animate={{ y: '0%' }}
                 transition={{ duration: 1.1, delay: 0.1, ease }}
               >
                 Naše <span className="text-accent">práce</span>
-              </motion.span>
+              </m.span>
             </h1>
-            <motion.p {...fadeUp(0.25)} className="mt-6 max-w-[48ch] text-lg leading-relaxed text-muted">
+            <m.p {...fadeUp(0.25)} className="mt-6 max-w-[48ch] text-lg leading-relaxed text-muted">
               Detailní pohled na naše realizace. Preciznost v každém kroku.
-            </motion.p>
+            </m.p>
           </div>
 
           <div className="mt-14 columns-1 gap-4 sm:columns-2 md:mt-20 lg:columns-3 lg:gap-5">
             {galleryItems.map((item, i) => (
-              <motion.button
+              <m.button
                 key={item.id}
                 type="button"
                 initial={reduce ? false : { opacity: 0, y: 32 }}
@@ -169,13 +169,13 @@ export default function GalleryPage() {
                   className="h-auto w-full object-cover transition-transform duration-[1.2s] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.04]"
                   sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                   quality={60}
-                  priority={i < 3}
+                  priority={i === 0}
                 />
                 <span className="absolute inset-0 bg-black/0 transition-colors duration-500 group-hover:bg-black/25" />
                 <span className="absolute bottom-4 right-4 flex h-11 w-11 translate-y-2 items-center justify-center rounded-full bg-white text-[#0b0b0c] opacity-0 transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:translate-y-0 group-hover:opacity-100">
                   <Plus size={20} strokeWidth={2} />
                 </span>
-              </motion.button>
+              </m.button>
             ))}
           </div>
         </div>
@@ -183,7 +183,7 @@ export default function GalleryPage() {
 
       <AnimatePresence>
         {index !== null && (
-          <motion.div
+          <m.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
@@ -235,7 +235,7 @@ export default function GalleryPage() {
               onClick={(e) => e.stopPropagation()}
             >
               <AnimatePresence initial={false} custom={direction} mode="popLayout">
-                <motion.div
+                <m.div
                   key={index}
                   custom={direction}
                   variants={slideVariants}
@@ -272,7 +272,7 @@ export default function GalleryPage() {
                       sizes="100vw"
                     />
                   </div>
-                </motion.div>
+                </m.div>
               </AnimatePresence>
             </div>
 
@@ -298,7 +298,7 @@ export default function GalleryPage() {
                 ))}
               </div>
             </div>
-          </motion.div>
+          </m.div>
         )}
       </AnimatePresence>
     </div>
